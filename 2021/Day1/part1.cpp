@@ -1,3 +1,11 @@
+/**
+ * @file part1.cpp
+ * @author Justin Stevens (https://github.com/JSteve0)
+ * @brief Day 1 part 1 of Advent of Code 2021 (https://adventofcode.com)
+ * @version 1.0
+ * @date 2022-10-06
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,28 +18,22 @@ int
 main () 
 {
   ifstream file;
-  string line;
   file.open ("input.txt");
   
   if (file.is_open())
   {
+    int curr, count = 0;
+    string line;
 
-    int prev = 0;
-    int curr = 0;
-    int count = 0;
+    getline (file, line);
+    int prev = stoi (line);
 
     while ( getline (file, line) )
     {
       curr = stoi(line);
-      if (prev == 0) {
-        prev = curr;
-        continue;
-      }
 
       if (curr > prev)
-      {
         ++count;
-      }
 
       prev = curr;
     }
@@ -41,5 +43,4 @@ main ()
   }
 
   return 0;
-
 }

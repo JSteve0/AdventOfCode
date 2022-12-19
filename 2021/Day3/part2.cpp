@@ -1,7 +1,7 @@
 /**
- * @file part1.cpp
+ * @file part2.cpp
  * @author Justin Stevens (https://github.com/JSteve0)
- * @brief Day 3 part 1 of Advent of Code 2021 (https://adventofcode.com)
+ * @brief Day 3 part 2 of Advent of Code 2021 (https://adventofcode.com)
  * @version 1.0
  * @date 2022-10-09
 */

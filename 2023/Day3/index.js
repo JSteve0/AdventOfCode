@@ -57,85 +57,48 @@ const part2 = () => {
 
     let sum = 0;
     data.forEach((element, index) => {
-        let startIndex = -1;
-        let endIndex = -1;
         for (let i = 0; i < element.length; i++) {
             if (element[i] === '*') {
-                let number1 = null;
-                let number2 = null;
-                //left case
-                if (i !== 0 && isDigit(element[i - 1])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(element, i - 1);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(element, i - 1);
-                    }
-                }
-                //right case
-                if (i !== element.length && isDigit(element[i + 1])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(element, i + 1);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(element, i + 1);
-                    }
-                }
-                //up case
-                if (index !== 0 && isDigit(data[index - 1][i])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(data[index - 1], i);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(data[index - 1], i);
-                    }
-                }
-                //down case
-                if (index !== data.length && isDigit(data[index + 1][i])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(data[index + 1], i);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(data[index + 1], i);
-                    }
-                }
-                //diagonal up left case
-                if (index !== 0 && i !== 0 && isDigit(data[index - 1][i - 1]) && !isDigit(data[index - 1][i])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(data[index - 1], i - 1);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(data[index - 1], i - 1);
-                    }
-                }
-                //diagonal up right case
-                if (index !== 0 && i !== element.length && isDigit(data[index - 1][i + 1]) && !isDigit(data[index - 1][i])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(data[index - 1], i + 1);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(data[index - 1], i + 1);
-                    }
-                }
-                //diagonal down left case
-                if (index !== data.length && i !== 0 && isDigit(data[index + 1][i - 1]) && !isDigit(data[index + 1][i])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(data[index + 1], i - 1);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(data[index + 1], i - 1);
-                    }
-                }
-                //diagonal down right case
-                if (index !== data.length && i !== element.length && isDigit(data[index + 1][i + 1]) && !isDigit(data[index + 1][i])) {
-                    if (number1 === null) {
-                        number1 = searchBidirectional(data[index + 1], i + 1);
-                    } else if (number2 === null){
-                        number2 = searchBidirectional(data[index + 1], i + 1);
-                    }
+                let foundNumbers = [];
+
+                foundNumbers.push(processDirection(data, index, i - 1)); // Left
+                foundNumbers.push(processDirection(data, index, i + 1));  // Right
+
+                let up = processDirection(data, index - 1, i);
+                let down = processDirection(data, index + 1, i);
+
+                if (up) {
+                    foundNumbers.push(up);
+                } else {
+                    foundNumbers.push(processDirection(data, index - 1, i - 1)); // Diagonal Up Left
+                    foundNumbers.push(processDirection(data, index - 1, i + 1));  // Diagonal Up Right
                 }
 
-                if (number1 !== null && number2 !== null) {
-                    sum += number1 * number2;
+                if (down) {
+                    foundNumbers.push(down);
+                } else {
+                    foundNumbers.push(processDirection(data, index + 1, i - 1));  // Diagonal Down Left
+                    foundNumbers.push(processDirection(data, index + 1, i + 1)); // Diagonal Down Right
+                }
+
+                foundNumbers = foundNumbers.filter((element) => element !== null && !isNaN(element) && element !== undefined).filter(function(item, pos) {
+                    return foundNumbers.indexOf(item) === pos;
+                });
+
+                if (foundNumbers.length > 1) {
+                    sum += foundNumbers.reduce((acc, element) => acc * element, 1);
                 }
             }
         }
     });
 
     console.log(sum);
+}
+
+function processDirection(array, rowIndex, colIndex) {
+    if (isDigit(array[rowIndex][colIndex])) {
+        return searchBidirectional(array[rowIndex], colIndex);
+    }
 }
 
 searchBidirectional = (string, startIndex) => {

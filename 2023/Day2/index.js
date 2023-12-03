@@ -16,20 +16,14 @@ const readFile = (fileName) => {
     return fs.readFileSync(fileName, 'utf8').split('\n');
 }
 
-const isDigit = (char) => {
-    return char >= '0' && char <= '9';
-}
-
 const part1 = () => {
-    let redIndex = 0;
-    let greenIndex = 1;
-    let blueIndex = 2;
-    let limits = [12, 13, 14];
+    const redIndex = 0, greenIndex = 1, blueIndex = 2;
+    const limits = [12, 13, 14];
 
     const data = readFile('./input.txt');
 
     const sum = data.reduce((acc, line) => {
-        let gameID = parseInt(line.split(' ')[1].replaceAll(':', ''));
+        const gameID = parseInt(line.split(' ')[1].replaceAll(':', ''));
         let validGame = true;
 
         line.split(':')[1].split(';').forEach((element) => {
@@ -56,9 +50,7 @@ const part2 = () => {
 
     const sum = data.reduce((acc, line) => {
 
-        let redMax = -1;
-        let greenMax = -1;
-        let blueMax = -1;
+        let redMax = -1, greenMax = -1, blueMax = -1;
 
         line.split(':')[1].split(';').forEach((element) => {
             element.split(',').forEach((color) => {

@@ -12,10 +12,6 @@ const main = () => {
     part2();
 }
 
-const isDigit = (char) => {
-    return char >= '0' && char <= '9';
-}
-
 const readFile = (fileName) => {
     return fs.readFileSync(fileName, 'utf8').split('\r\n');
 }

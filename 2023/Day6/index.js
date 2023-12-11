@@ -41,7 +41,7 @@ const part2 = () => {
     for (let speed = 1; speed < time; speed++) {
         const distanceTraveled = speed * (time - speed);
         if (distanceTraveled > distance) {
-            if (flag) {
+            if (!flag) {
                 flag = true;
             }
             count++;

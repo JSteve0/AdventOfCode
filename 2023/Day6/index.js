@@ -38,7 +38,16 @@ const part2 = () => {
 
     let count = 0;
     let flag = false;
-    for (let speed = 1; speed < time; speed++) {
+
+    // speed * (time - speed) >= distance
+    // speed * time - speed^2 >= distance
+    // speed^2 - speed * time + distance >= 0
+    // speed = (time +- sqrt(time^2 - 4 * distance)) / 2
+    const speed = Math.ceil((time + Math.sqrt(Math.pow(time, 2) - 4 * distance)) / 2);
+    const speed2 = Math.ceil((time - Math.sqrt(Math.pow(time, 2) - 4 * distance)) / 2);
+    console.log(speed - speed2);
+
+    /*for (let speed = 1; speed < time; speed++) {
         const distanceTraveled = speed * (time - speed);
         if (distanceTraveled > distance) {
             if (!flag) {
@@ -50,7 +59,7 @@ const part2 = () => {
         }
     }
 
-    console.log(count);
+    console.log(count);*/
 }
 
 main();

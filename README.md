@@ -6,6 +6,6 @@ Welcome to my Advent of Code repository! This collection showcases my personal s
 
 To explore the solutions:
 
-1. **Clone the Repository:**
+**Clone the Repository:**
    ```bash
    git clone https://github.com/JSteve0/AdventOfCodes.git

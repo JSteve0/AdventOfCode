@@ -1,8 +1,8 @@
 /**
  * @file index.js
  * @author Justin Stevens (https://github.com/JSteve0)
- * @brief Day 4 of Advent of Code 2023 (https://adventofcode.com)
- * @date 2023-12-04
+ * @brief Day 6 of Advent of Code 2023 (https://adventofcode.com)
+ * @date 2023-12-10
  */
 
 const fs = require('fs');
